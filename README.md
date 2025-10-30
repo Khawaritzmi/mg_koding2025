@@ -1,4 +1,4 @@
-<img src="../assets/abner2.jpg" alt="Banner" style="width:100%; height:150px; object-fit:cover; object-position:center;" />
+<img src="assets/abner2.jpg" alt="Banner" style="width:100%; height:150px; object-fit:cover; object-position:center;" />
 
 # Math Gesture Solver
 
