@@ -1,3 +1,5 @@
+<img src="../assets/abner2.jpg" alt="Banner" style="width:100%; height:150px; object-fit:cover; object-position:center;" />
+
 # Math Gesture Solver
 
 Hands-free math tutoring experiment that uses a webcam, hand gestures, and Google Gemini to solve equations you “write” in the air. Built with Streamlit/OpenCV for the primary experience, plus a Tkinter desktop prototype and supporting learning materials.
