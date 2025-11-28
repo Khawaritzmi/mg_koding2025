@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usetikzlibrary{shapes.geometric, arrows}
+
+\begin{document}
+
+\title{Flowchart and Pseudocode for Python Calculator}
+\author{}
+\date{}
+\maketitle
+
+\section*{Flowchart}
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\begin{tikzpicture}[node distance=2cm]
+
+% Nodes
+\node (start) [startstop] {Start};
+\node (menu) [io, below of=start] {Display Menu};
+\node (choice) [process, below of=menu] {Get User Choice};
+\node (checkchoice) [decision, below of=choice, yshift=-1cm] {Choice = 5?};
+\node (exit) [startstop, below of=checkchoice, yshift=-1cm] {Exit};
+\node (operation) [process, right of=checkchoice, xshift=3cm] {Perform Operation};
+\node (error) [io, below of=operation] {Display Error};
+\node (result) [io, below of=error] {Display Result};
+\node (loop) [startstop, below of=result] {Back to Menu};
+
+% Arrows
+\draw [arrow] (start) -- (menu);
+\draw [arrow] (menu) -- (choice);
+\draw [arrow] (choice) -- (checkchoice);
+\draw [arrow] (checkchoice) -- node[anchor=east] {yes} (exit);
+\draw [arrow] (checkchoice) -- node[anchor=south] {no} (operation);
+\draw [arrow] (operation) -- (result);
+\draw [arrow] (result) -- (loop);
+\draw [arrow] (loop) -- (menu);
+\draw [arrow] (operation) -- (error);
+\draw [arrow] (error) -- (result);
+
+\end{tikzpicture}
+
+\newpage
+
+\section*{Pseudocode}
+
+\begin{algorithm}
+\caption{Python Calculator Pseudocode}
+\begin{algorithmic}[1]
+\State \textbf{Function} add(x, y)
+\State \hspace{1cm} \textbf{Return} x + y
+\State \textbf{Function} subtract(x, y)
+\State \hspace{1cm} \textbf{Return} x - y
+\State \textbf{Function} multiply(x, y)
+\State \hspace{1cm} \textbf{Return} x * y
+\State \textbf{Function} divide(x, y)
+\If{y = 0}
+    \State \hspace{1cm} \textbf{Return} "Cannot divide by zero!"
+\Else
+    \State \hspace{1cm} \textbf{Return} x / y
+\EndIf
+\State
+\State \textbf{Function} calculator()
+\State \hspace{1cm} Print "Welcome to the Python Calculator!"
+\While{True}
+    \State \hspace{1cm} Print "Choose the operation you'd like to perform:"
+    \State \hspace{1cm} Print "1. Add (+), 2. Subtract (-), 3. Multiply (*), 4. Divide (/), 5. Exit"
+    \State \hspace{1cm} Input choice
+    \If{choice = 5}
+        \State \hspace{1cm} Print "Goodbye!"
+        \State \hspace{1cm} Break
+    \EndIf
+    \If{choice \in [1, 2, 3, 4]}
+        \State \hspace{1cm} Input num1, num2
+        \If{choice = 1}
+            \State \hspace{1cm} result = add(num1, num2)
+        \ElsIf{choice = 2}
+            \State \hspace{1cm} result = subtract(num1, num2)
+        \ElsIf{choice = 3}
+            \State \hspace{1cm} result = multiply(num1, num2)
+        \ElsIf{choice = 4}
+            \State \hspace{1cm} result = divide(num1, num2)
+        \EndIf
+        \State \hspace{1cm} Print "The result is: " + result
+    \Else
+        \State \hspace{1cm} Print "Invalid input, please select a valid option."
+    \EndIf
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}

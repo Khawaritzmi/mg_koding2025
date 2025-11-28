@@ -4,7 +4,7 @@ import tkinter as tk
 # Function to update the entry widget with the pressed button value
 def button_click(value):
     current = entry.get()
-    entry.delete(0, tk.END)
+    entry.delete(0, tk.END) #Perintah ini digunakan untuk melakuakan delete pada bagian tombol yang ditekan 
     entry.insert(tk.END, current + str(value))
 
 

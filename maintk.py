@@ -1,6 +1,6 @@
 import os
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, simpledialog
 from typing import List, Optional, Tuple
 import cv2
 import numpy as np
@@ -13,20 +13,36 @@ STROKE_GESTURE: List[int] = [0, 1, 0, 0, 0]
 CLEAR_GESTURE: List[int] = [1, 0, 0, 0, 0]
 SUBMIT_GESTURE: List[int] = [1, 1, 1, 1, 0]
 PROMPT_TEXT = "Solve this math problem"
-FRAME_WIDTH = 1280
-FRAME_HEIGHT = 720
+FRAME_WIDTH = 200
+FRAME_HEIGHT = 200
 CAMERA_INDEX = 1
 LINE_COLOR = (255, 0, 255)
 LINE_THICKNESS = 10
-MODEL_NAME = "gemini-1.5-flash"
+MODEL_NAME = "gemini-2.5-flash"
 
 
 def configure_model() -> Optional[genai.GenerativeModel]:
     """Initialize the Gemini model."""
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
-        messagebox.showerror("Error", "Google API key not found.")
-        return None
+        api_key = simpledialog.askstring(
+            "Google API Key",
+            (
+                "Masukkan Google API key Anda untuk mengakses Gemini.\n"
+                "Jika belum punya, kunjungi https://aistudio.google.com/app/apikey untuk membuatnya."
+            ),
+            show="*",
+        )
+        if not api_key:
+            messagebox.showerror(
+                "Error",
+                (
+                    "Google API key tidak ditemukan. "
+                    "Set variabel lingkungan GOOGLE_API_KEY atau masukkan kunci saat diminta."
+                ),
+            )
+            return None
+        os.environ["GOOGLE_API_KEY"] = api_key
     genai.configure(api_key=api_key)
     return genai.GenerativeModel(MODEL_NAME)
 
